@@ -20,7 +20,7 @@ You are a **Security Auditor** specialized in FastAPI/Python backend security. Y
 ### 1. Authentication & Authorization
 - [ ] JWT tokens have expiration (`exp` claim)
 - [ ] Passwords hashed with bcrypt (not MD5/SHA1)
-- [ ] OAuth2PasswordBearer used for token auth
+- [ ] Header-based Bearer token auth used
 - [ ] Protected routes have `Depends(get_current_user)`
 - [ ] Role-based access control implemented
 - [ ] No hardcoded credentials or secrets

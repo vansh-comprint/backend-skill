@@ -335,6 +335,25 @@ class UserResponse(UserBase):
     model_config = ConfigDict(from_attributes=True)
 ```
 
+```python
+# schemas/AuthSchema.py
+from pydantic import BaseModel, EmailStr
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
+class LoginResponse(BaseModel):
+    success: bool
+    data: TokenResponse
+    message: str
+```
+
 ### 6. Base Repository
 ```python
 # repositories/base.py
@@ -513,8 +532,7 @@ def decode_token(token: str) -> dict | None:
 ### 11. Dependencies
 ```python
 # api/dependencies.py
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, status, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 from config.database import get_db
 from core.security import decode_token
@@ -522,15 +540,16 @@ from repositories.UserRepository import UserRepository
 from services.UserService import UserService
 from models.User import User
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
-
 async def get_user_service(db: AsyncSession = Depends(get_db)) -> UserService:
     return UserService(UserRepository(db))
 
 async def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    authorization: str = Header(..., description="Bearer token"),
     service: UserService = Depends(get_user_service)
 ) -> User:
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Invalid authorization header")
+    token = authorization[7:]  # Remove "Bearer " prefix
     payload = decode_token(token)
     if not payload:
         raise HTTPException(status_code=401, detail="Invalid token")
@@ -656,7 +675,7 @@ async def health():
 ### Authentication
 - JWT tokens with expiration
 - bcrypt password hashing
-- OAuth2PasswordBearer for token auth
+- Header-based Bearer token auth
 - Protected routes use `Depends(get_current_user)`
 
 ### Input Validation
@@ -1236,18 +1255,18 @@ def decode_token(token: str) -> dict[str, Any] | None:
 ### RBAC Dependencies
 ```python
 # api/dependencies.py
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, status, Header
 from functools import wraps
 from typing import Callable
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
-
 async def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    authorization: str = Header(..., description="Bearer token"),
     service: UserService = Depends(get_user_service)
 ) -> User:
     """Get current authenticated user with roles loaded."""
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Invalid authorization header")
+    token = authorization[7:]  # Remove "Bearer " prefix
     payload = decode_token(token)
     if not payload or payload.get("type") != "access":
         raise HTTPException(status_code=401, detail="Invalid token")
@@ -1336,17 +1355,16 @@ async def assign_role(
 ```python
 # api/v1/endpoints/auth.py
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
-from schemas.AuthSchema import TokenResponse, LoginResponse
+from schemas.AuthSchema import TokenResponse, LoginResponse, LoginRequest
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login", response_model=LoginResponse)
 async def login(
-    form_data: OAuth2PasswordRequestForm = Depends(),
+    credentials: LoginRequest,
     service: AuthService = Depends(get_auth_service)
 ):
-    user = await service.authenticate(form_data.username, form_data.password)
+    user = await service.authenticate(credentials.email, credentials.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
@@ -2815,7 +2833,7 @@ For EVERY async function:
 ```python
 # FastAPI
 from fastapi import APIRouter, Depends, HTTPException, status, Query, Path, Body
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import Header
 
 # Pydantic
 from pydantic import BaseModel, Field, EmailStr, ConfigDict, field_validator
