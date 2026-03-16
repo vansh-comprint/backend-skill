@@ -1,0 +1,10 @@
+{
+  "name": "comprint-back",
+  "description": "Holistic FastAPI backend development — root-cause driven, zero quick fixes",
+  "version": "1.0.0",
+  "author": {
+    "name": "Comprint"
+  },
+  "category": "development",
+  "keywords": ["fastapi", "python", "backend", "api"]
+}
