@@ -1,46 +1,88 @@
 # comprint-back
 
-Holistic FastAPI backend development for Claude Code — root-cause driven, zero quick fixes.
+A Claude Code plugin that gives you a complete FastAPI development system. One command covers everything — project scaffolding, endpoints, authentication, database, testing, error handling, background jobs, and more.
+
+Built on **FastAPI + Pydantic v2 + SQLAlchemy 2.0 async + PostgreSQL** with production-ready patterns.
 
 ## Installation
 
 ```bash
-/plugin install --source github:YOUR-USERNAME/comprint-back
+/plugin install --source github:vansh-comprint/backend-skill
 ```
+
+That's it. `/comprint-back` is immediately available.
 
 ## Usage
 
-**Explicit invocation:**
 ```
-/comprint-back add user authentication with JWT and role-based access
+/comprint-back scaffold a new FastAPI project with auth and database
+/comprint-back add a CRUD endpoint for products
+/comprint-back set up JWT authentication with role-based access control
+/comprint-back fix this 422 validation error
+/comprint-back add Celery background tasks with Redis
 ```
 
-**Auto-detection:** Just start working on FastAPI code — the plugin detects it and activates automatically.
+Or just start working on FastAPI code — the plugin auto-detects backend work and activates.
 
-## What It Does
+## What You Get
 
-- **Routes** your request to the right domain knowledge (9 reference areas)
-- **Enforces** a 7-phase process: Clarify, Classify, Load, Analyze, Design, Implement, Validate
-- **Investigates** every problem for root cause before writing any code
-- **Grounds** all patterns in curated reference files, not model memory
+### 9 Domain Knowledge Areas
 
-## Reference Areas
+The plugin carries a curated knowledge base covering the full FastAPI stack. When you ask for something, it loads only the relevant references — keeping context focused.
 
-| Reference | Covers |
-|-----------|--------|
-| `architecture.md` | 4-layer pattern, simple + modular project structures, DI |
-| `api-design.md` | Response format, endpoint patterns, schemas, versioning |
-| `database.md` | Async SQLAlchemy, repositories, migrations, optimization |
-| `security.md` | JWT, RBAC, CORS, rate limiting, security audit checklist |
-| `exceptions.md` | Custom exceptions, global handlers, FE-friendly errors |
-| `logging.md` | Structured JSON logging, request tracing |
-| `testing.md` | Async fixtures, FakeRepository, integration tests |
-| `background-tasks.md` | Celery vs BackgroundTasks, scheduling, Docker |
-| `common-errors.md` | 10 documented error prevention patterns |
+| Domain | What's Inside |
+|--------|--------------|
+| **Architecture** | 4-layer pattern (endpoints → services → repositories → models), flat + modular project structures, dependency injection |
+| **API Design** | Standardized response format, CRUD endpoint patterns, Pydantic schema design, API versioning, TypeScript frontend contracts |
+| **Database** | Async SQLAlchemy 2.0, generic repository pattern, Alembic migrations, query optimization, relationship patterns |
+| **Security** | JWT (access + refresh tokens), RBAC with permissions, CORS, rate limiting, security headers, audit checklist |
+| **Error Handling** | Custom exception hierarchy, global handlers, validation error formatting, FE-friendly error responses |
+| **Logging** | Structured JSON logging, request ID tracing, per-request context propagation |
+| **Testing** | Async fixtures, FakeRepository pattern (no mocking needed), integration tests, coverage config |
+| **Background Tasks** | FastAPI BackgroundTasks vs Celery decision guide, task scheduling, Docker Compose for workers |
+| **Common Errors** | 10 documented prevention patterns — Pydantic v2 gotchas, async traps, CORS issues, form data quirks |
 
-## Philosophy
+### Smart Routing
 
-1. **No quick fixes.** Every problem is an investigation. Every fix is a root-cause fix.
-2. **No hallucination.** All patterns come from reference files, not from memory.
-3. **One step at a time.** Each phase completes and verifies before the next begins.
-4. **Portable.** Clone and install — works on any machine with zero configuration.
+Tell it what you need. It figures out which knowledge areas apply and loads them.
+
+- "add auth" → loads Security + API Design
+- "create a new project" → loads Architecture + Database + Logging
+- "fix this 500 error" → loads Common Errors + relevant domain
+- "something's not working" → investigates first, then loads what's needed
+
+### How It Works
+
+Every task follows a structured process:
+
+1. **Classify** — What kind of work is this?
+2. **Load** — Pull in only the relevant reference files
+3. **Analyze** — Read the existing codebase, understand current patterns
+4. **Design** — Propose an approach, get your approval
+5. **Implement** — Follow the reference patterns exactly
+6. **Validate** — Verify everything is wired up, no stubs, no gaps
+
+## Tech Stack
+
+- Python 3.12+
+- FastAPI
+- Pydantic v2
+- SQLAlchemy 2.0 (async)
+- PostgreSQL + AsyncPG
+- Alembic
+- pytest + pytest-asyncio + httpx
+- Celery + Redis
+- python-jose (JWT)
+- passlib + bcrypt
+
+## Project Structures
+
+The plugin supports two project layouts and helps you pick the right one:
+
+**Simple** — flat structure for small-to-medium APIs (<50 endpoints, 1-4 devs)
+
+**Modular** — domain-based modules for larger systems (50+ endpoints, multiple teams)
+
+## License
+
+MIT
