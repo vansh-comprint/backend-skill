@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/plugins-1-blue?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMTQiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMyIgeT0iMTQiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMTQiIHk9IjE0IiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiByeD0iMSIvPjwvc3ZnPg==">
+  <img src="https://img.shields.io/badge/plugins-2-blue?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMTQiIHk9IjMiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMyIgeT0iMTQiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIxIi8+PHJlY3QgeD0iMTQiIHk9IjE0IiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiByeD0iMSIvPjwvc3ZnPg==">
   <img src="https://img.shields.io/badge/python-3.12+-3776AB?style=flat-square&logo=python&logoColor=white">
   <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
   <img src="https://img.shields.io/badge/claude_code-compatible-8A2BE2?style=flat-square">
@@ -21,10 +21,11 @@
 
 ```bash
 /plugin marketplace add vansh-comprint/comprint-skills
-/plugin install comprint-back
-```
 
-Done. `/comprint-back` is live.
+# Install what you need
+/plugin install comprint-back
+/plugin install comprint-marketing
+```
 
 ---
 
@@ -93,13 +94,72 @@ FastAPI · Pydantic v2 · SQLAlchemy 2.0 async · PostgreSQL · AsyncPG · Alemb
 
 ---
 
+### 📣 comprint-marketing
+
+**Marketing Agency OS — run your entire social media operation from Claude Code.**
+
+16 commands covering brand onboarding, content generation, competitive intelligence, growth tracking, and cross-platform repurposing. Every command reads your brand's 10 knowledge files for fully contextual output.
+
+```
+/brand-onboard my-brand
+/brand-generate my-brand
+/competitor-intel my-brand
+/weekly-review my-brand
+```
+
+<details>
+<summary><b>📋 All 16 commands</b></summary>
+
+<br>
+
+| Category | Command | What it does |
+|----------|---------|-------------|
+| **Brand** | `/brand-onboard` | Deep onboarding — builds 10 knowledge files for a new brand |
+| | `/growth-status` | Quick dashboard of brand health and level |
+| | `/weekly-review` | Level-adapted weekly growth brief |
+| | `/client-report` | Client-facing weekly report |
+| | `/brand-audit` | 48-hour prospect audit for new clients |
+| **Content** | `/brand-generate` | Full content engine — reels, carousels, stories, posts |
+| | `/scripter` | Hinglish reel scriptwriter with hooks and CTAs |
+| | `/repurpose` | Cross-platform content adaptation |
+| | `/trend-scan` | Trending topics + content ideas |
+| **Intel** | `/competitor-intel` | Intelligence brief with Steal Cards |
+| | `/ig-research` | Deep Instagram account research |
+| | `/ig-ai` | Multi-agent Instagram analysis |
+| | `/yt-research` | YouTube channel research |
+| | `/yt-ai` | YouTube content analysis |
+| | `/yt-knowledge` | YouTube knowledge extraction |
+| | `/yt-prompts` | YouTube prompt library |
+
+</details>
+
+<details>
+<summary><b>🧠 Brand Knowledge System</b></summary>
+
+<br>
+
+Every brand gets 10 structured files that all commands read for context:
+
+Brand · Voice · Design · Content · Audience · Platform · Performance · Growth · Competitors · Offer
+
+Plus a shared **Content Intelligence Framework** covering hook engineering, story architecture, viral mechanics, and platform execution rules.
+
+</details>
+
+<br>
+
+> 📖 [Full documentation →](plugins/comprint-marketing/README.md) · 🔗 [Full ecosystem with scripts & automation →](https://github.com/marketing-alisha/Marketing)
+
+---
+
 ## Contributing
 
 Want to add a plugin? Drop it in `plugins/your-plugin/` and open a PR.
 
 ```
 plugins/
-├── comprint-back/          ← existing
+├── comprint-back/          ← FastAPI backend
+├── comprint-marketing/     ← Marketing agency OS
 ├── your-plugin/            ← yours
 │   ├── .claude-plugin/
 │   │   └── plugin.json

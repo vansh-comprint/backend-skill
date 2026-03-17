@@ -1,6 +1,6 @@
 {
   "name": "comprint-skills",
-  "description": "Comprint's collection of Claude Code plugins — production-ready development skills for FastAPI, and more coming soon.",
+  "description": "Comprint's collection of Claude Code plugins — backend development, marketing automation, and more.",
   "owner": {
     "name": "Comprint"
   },
@@ -10,6 +10,12 @@
       "description": "FastAPI development with 9 curated knowledge areas — architecture, API design, database, security, exceptions, logging, testing, background tasks, and common error prevention. Smart routing loads only what you need.",
       "version": "1.0.0",
       "source": "./plugins/comprint-back"
+    },
+    {
+      "name": "comprint-marketing",
+      "description": "Marketing Agency OS — brand management, content generation, competitive intelligence, and growth tracking. 16 commands covering the full agency workflow.",
+      "version": "1.0.0",
+      "source": "./plugins/comprint-marketing"
     }
   ]
 }

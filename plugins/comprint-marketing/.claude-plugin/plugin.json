@@ -1,0 +1,10 @@
+{
+  "name": "comprint-marketing",
+  "description": "Marketing Agency OS — AI-powered brand management, content generation, competitive intelligence, and growth tracking for social media agencies",
+  "version": "1.0.0",
+  "author": {
+    "name": "Comprint"
+  },
+  "category": "marketing",
+  "keywords": ["marketing", "content-generation", "social-media", "instagram", "competitor-analysis", "brand-management", "agency"]
+}
